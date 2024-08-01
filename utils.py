@@ -5,7 +5,8 @@ import os
 
 
 def generate_search_result(question, memory, openai_api_key):
-    model = ChatOpenAI(model="gpt-3.5-turbo", openai_api_base=os.getenv("OPENAI_API_BASE_V1"),
+    # add openai_api_base=os.getenv("OPENAI_API_BASE_V1") param if needed.
+    model = ChatOpenAI(model="gpt-3.5-turbo",
                        openai_api_key=openai_api_key)
 
     chain = ConversationChain(llm=model, memory=memory)
