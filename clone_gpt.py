@@ -9,6 +9,7 @@ st.header("万能AI助手")
 with st.sidebar:
     openai_api_key = st.text_input(label="请输入你的API key", value=os.getenv("OPENAI_API_KEY"), type="password")
     st.markdown("[获取OPENAI API KEY](https://openai.com/)")
+    openai_api_base = st.text_input(label="请输入你的OPENAI API BASE URL", value=os.getenv("OPENAI_API_BASE_V1"))
 
 if "memory" not in st.session_state:
     st.session_state['memory'] = ConversationBufferMemory(return_messages=True)
@@ -26,6 +27,6 @@ if prompt:
     st.session_state["messages"].append({"role": "human", "content": prompt})
     st.chat_message("human").write(prompt)
     with st.spinner("AI 正在思索中，请稍后..."):
-        result = generate_search_result(prompt, st.session_state['memory'], openai_api_key)
+        result = generate_search_result(prompt, st.session_state['memory'], openai_api_key, openai_api_base)
     st.session_state["messages"].append({"role": "ai", "content": result})
     st.chat_message("ai").write(result)
